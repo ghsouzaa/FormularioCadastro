@@ -1,0 +1,91 @@
+﻿<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunda</title>
+
+    <script>
+        $(document).ready(function () {
+            $("#btnOK").click(function () {
+
+                var erro = false;
+
+                if (!$("#txtEmail").val().includes("@@")) {
+                    erro = true;
+                }
+                console.log(erro);
+            })
+        })
+    </script>
+
+    <style>
+        body {
+            padding-top: 30px;
+            background-color: #eef3f9;
+        }
+
+        .formulario {
+            width: 40%;
+            margin: auto;
+            padding: 15px;
+            background-color: white;
+        }
+
+        @@media screen and ( max-width: 767px) {
+            .formulario {
+                width: 80%;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="formulario">
+
+        <h3 style="text-align:center">Formulário de Cadastro</h3>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Nome:</span>
+            </div>
+            <input id="txtNome" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">CPF:</span>
+            </div>
+            <input id="txtCPF" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">E-mail:</span>
+            </div>
+            <input id="txtEmail" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Data Nascimento:</span>
+            </div>
+            <input id="txtDtNascimento" type="date" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Telefone:</span>
+            </div>
+            <input id="txtTel" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                <button id="btnOK" type="button" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
