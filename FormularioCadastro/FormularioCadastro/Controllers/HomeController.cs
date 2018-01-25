@@ -12,5 +12,10 @@ namespace FormularioCadastro.Controllers
         {
             return View();
         }
+
+        public ActionResult Consultar()
+        {
+            return View();
+        }
     }
 }
