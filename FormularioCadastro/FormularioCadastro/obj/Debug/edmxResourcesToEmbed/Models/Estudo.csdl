@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EstudoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Pessoa">
+    <Key>
+      <PropertyRef Name="IDPessoa" />
+    </Key>
+    <Property Name="IDPessoa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CPF" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DataNascimento" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Celular" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="EstudoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Pessoa" EntityType="Self.Pessoa" />
+  </EntityContainer>
+</Schema>

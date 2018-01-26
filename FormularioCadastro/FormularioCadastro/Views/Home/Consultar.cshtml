@@ -1,4 +1,5 @@
-﻿<html>
+﻿@model FormularioCadastro.Models.ConsultarViewModel
+<html>
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,24 +50,64 @@
             </div>
         </div>
         <div class="row">
-            <h5>Teste</h5>
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">CPF</th>
+                                <th scope="col">Data de nascimento</th>
+                                <th scope="col">Celular</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.pessoas)
+                            {
+                                <tr id="tr_@item.IDPessoa">
+                                    <th scope="row">@item.IDPessoa</th>
+                                    <td>@item.Nome</td>
+                                    <td>@item.CPF</td>
+                                    <td>@item.DataNascimento.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.Celular</td>
+                                    <td>
+                                        <button onclick="ExcluirPessoa(@item.IDPessoa)" type="button" class="btn btn-sm btn-danger btn-block">Excluir</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/src/loadingoverlay.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#btnOK").click(function () {
+        function ExcluirPessoa(idPessoa) {
+            $.LoadingOverlay("show");
 
-                var erro = false;
+            var url = '@Url.Action("ExcluirPessoa", "Home")' + "?idPessoa=" + idPessoa;
 
-                if (!$("#txtEmail").val().includes("@@")) {
-                    erro = true;
+            var result = $.getJSON(url, function () {
+            }).done(function (response) {
+                var message;
+                if (response.Success) {
+                    message = response.Message + " excluido(a) com sucesso!";
                 }
-                console.log(erro);
-            })
-        })
+                else {
+                    message = "Erro ao tentar excluir pessoa. Erro: " + response.Message;
+                }
+                alert(message);
+                window.location.href = '@Url.Action("Consultar", "Home")';
+            }).always(function () {
+                $.LoadingOverlay("hide");
+            });
+        }
     </script>
 </body>
 </html>
