@@ -14,15 +14,15 @@ namespace FormularioCadastro.Controllers
             return View();
         }
 
-        public ActionResult Consulta()
+        public ActionResult Consultar()
         {
-            
-            using (EstudoEntities conn = new EstudoEntities())
-            {
-                ViewData["Pessoa"] = conn.Pessoa.ToList();
+            ConsultarViewModel viewModel = new ConsultarViewModel();
 
+            using (EstudoEntities con = new EstudoEntities())
+            {
+                viewModel.pessoas = con.Pessoa.ToList();
             }
-            return View();
+            return View(viewModel);
         }
 
         #region JSOn
@@ -83,6 +83,26 @@ namespace FormularioCadastro.Controllers
                 return Json(new { sucesso = false, e.Message }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public JsonResult RemoverPessoa(int idPessoa)
+        {
+            try
+            {
+                using (EstudoEntities conn = new EstudoEntities())
+                {
+                    Pessoa pessoa = conn.Pessoa.First(pes => pes.IDPessoa == idPessoa);
+
+                    conn.Pessoa.Remove(pessoa);
+                    conn.SaveChanges();
+                }
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { sucesso = false, e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         #endregion
 
         #region Métodos

@@ -1,7 +1,100 @@
-﻿@model FormularioCadastro.Models.ConsultaViewModel;
+﻿@model FormularioCadastro.Models.ConsultarViewModel
+
 @{
     ViewBag.Title = "Consultar";
 }
 
-<h2>Consultar</h2>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar</title>
 
+    <script>
+        function RemovePessoa(idPessoa) {
+            url = "@Url.Action("RemoverPessoa", "Home")" + '?idPessoa=' + idPessoa;
+
+            $.getJSON(url, function (retorno) {
+                if (retorno) {
+                    alert("Pessoa removida.");
+                    var r = $("#tr_" + idPessoa);
+                    r.remove();
+                }
+                else {
+                    alert("Erro ao remover pessoa. Erro: " + retorno.Message);
+                }
+            })
+
+        }
+    </script>
+
+    <style>
+        body {
+            padding-top: 70px;
+            background-color: #eef3f9;
+        }
+
+        .formulario {
+            width: 80%;
+            margin: auto;
+            padding: 15px;
+            background-color: white;
+        }
+
+        @@media screen and ( max-width: 767px) {
+            .formulario {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/Home/Index">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/Home/Consultar">Consultar</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="formulario">
+
+        <h3 style="text-align:center">Consulta de Filho da puta</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Data Nascimento</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.pessoas)
+                {
+                    <tr id="tr_@item.IDPessoa">
+                        <td>@item.IDPessoa</td>
+                        <td>@item.Nome</td>
+                        <td>@item.CPF</td>
+                        <td>@item.DataNascimento.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Celular</td>
+                        <td>@item.Email</td>
+                        <td><button type="button" class="btn btn-danger" onclick="RemovePessoa(@item.IDPessoa)">Excluir</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
