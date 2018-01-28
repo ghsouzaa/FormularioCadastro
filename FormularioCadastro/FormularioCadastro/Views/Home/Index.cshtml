@@ -7,15 +7,78 @@
     <title>Bunda</title>
 
     <script>
+
+        function LimparFormulario() {
+            $("#txtNome").val("");
+            $("#txtCPF").val("");
+            $("#txtDtNascimento").val("");
+            $("#txtTel").val("");
+            $("#txtEmail").val("");
+        }
+
         $(document).ready(function () {
+            $("#txtCPF").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                    // Allow: Ctrl+A, Command+A
+                    (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: home, end, left, right, down, up
+                    (e.keyCode >= 35 && e.keyCode <= 40)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
             $("#btnOK").click(function () {
 
-                var erro = false;
+                var txtEmail = $("#txtEmail").val();
 
-                if (!$("#txtEmail").val().includes("@@")) {
-                    erro = true;
+                if (txtEmail.includes("@@")) {
+
+                    var txtCPF = $("#txtCPF").val();
+                    var url = "@Url.Action("CPFJaCadastrado", "Home")" + '?cpf=' + txtCPF;
+                    $.getJSON(url, function (retorno) {
+
+                        if (retorno) {
+                            alert("CPF já cadastrado na base");
+                        }
+                        else {
+                            var dtNascimento = $("#txtDtNascimento").val();
+                            url = "@Url.Action("PessoaMenorDeIdade", "Home")" + '?dataNascimento=' + dtNascimento;
+
+                            $.getJSON(url, function (retorno) {
+
+                                if (retorno) {
+                                    alert("Não é possível cadastrar pirralhos.");
+                                }
+                                else {
+                                    var txtNome = $("#txtNome").val();
+                                    var txtCelular = $("#txtTel").val();
+
+                                    url = "@Url.Action("CadastrarPessoa", "Home")" + '?nome=' + txtNome + '&cpf=' + txtCPF + '&dtNascimento=' + dtNascimento + '&celular=' + txtCelular + '&email=' + txtEmail;
+
+                                    $.getJSON(url, function (retorno) {
+
+                                        if (retorno) {
+                                            alert("Cadastro realizado.");
+                                            LimparFormulario();
+                                        }
+                                        else {
+                                            alert("Erro ao cadastrar. Erro: " + retorno.Message);
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
                 }
-                console.log(erro);
+                else {
+                    alert("Favor informar um e-mail válido. Bocozão.");
+                }
             })
         })
     </script>
@@ -57,7 +120,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">CPF:</span>
             </div>
-            <input id="txtCPF" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+            <input id="txtCPF" maxlength="11" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
         <div class="input-group mb-3">

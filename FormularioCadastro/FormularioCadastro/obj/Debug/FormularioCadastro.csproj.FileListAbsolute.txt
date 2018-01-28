@@ -36,7 +36,9 @@ D:\Gabriel\Documents\GIT\FormularioCadastro\FormularioCadastro\FormularioCadastr
 D:\Gabriel\Documents\GIT\FormularioCadastro\FormularioCadastro\FormularioCadastro\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\Gabriel\Documents\GIT\FormularioCadastro\FormularioCadastro\FormularioCadastro\bin\Microsoft.AI.WindowsServer.xml
 D:\Gabriel\Documents\GIT\FormularioCadastro\FormularioCadastro\FormularioCadastro\bin\Microsoft.AI.Web.xml
-D:\Gabriel\Documents\GIT\FormularioCadastro\FormularioCadastro\FormularioCadastro\obj\Debug\FormularioCadastro.csprojResolveAssemblyReference.cache
 D:\Gabriel\Documents\GIT\FormularioCadastro\FormularioCadastro\FormularioCadastro\obj\Debug\FormularioCadastro.csproj.CoreCompileInputs.cache
 D:\Gabriel\Documents\GIT\FormularioCadastro\FormularioCadastro\FormularioCadastro\obj\Debug\FormularioCadastro.dll
 D:\Gabriel\Documents\GIT\FormularioCadastro\FormularioCadastro\FormularioCadastro\obj\Debug\FormularioCadastro.pdb
+D:\Gabriel\Documents\GIT\FormularioCadastro\FormularioCadastro\FormularioCadastro\bin\EntityFramework.dll
+D:\Gabriel\Documents\GIT\FormularioCadastro\FormularioCadastro\FormularioCadastro\bin\EntityFramework.xml
+D:\Gabriel\Documents\GIT\FormularioCadastro\FormularioCadastro\FormularioCadastro\obj\Debug\FormularioCadastro.csprojResolveAssemblyReference.cache
