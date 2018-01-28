@@ -1,4 +1,43 @@
-﻿@model List<FormularioCadastro.Models.ConsultaViewModel>;
+﻿@model FormularioCadastro.Models.ConsultaViewModel;
 
-<h2>Consulta</h2>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta</title>
+</head>
+<body>
+    <div class="formulario">
 
+        <h3 style="text-align:center">Consulta de Pessoas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Data Nascimento</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewData.pessoa)
+                {
+                    <tr>
+                        <td>item.IDPessoa</td>
+                        <td>item.Nome</td>
+                        <td>item.CPF</td>
+                        <td>item.DataNascimento.ToString("dd/MM/yyyy")</td>
+                        <td>item.Celular</td>
+                        <td>item.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>

@@ -16,12 +16,13 @@ namespace FormularioCadastro.Controllers
 
         public ActionResult Consulta()
         {
-            ConsultaViewModel pessoa = new ConsultaViewModel();
+            
             using (EstudoEntities conn = new EstudoEntities())
             {
-                pessoa.pessoa = conn.Pessoa.ToList();                
+                ViewData["Pessoa"] = conn.Pessoa.ToList();
+
             }
-            return View(pessoa);
+            return View();
         }
 
         #region JSOn
